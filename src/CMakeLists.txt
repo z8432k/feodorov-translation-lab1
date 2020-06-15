@@ -16,33 +16,28 @@ bison_target(Parser parser.y
 
 add_library(lexer
         OBJECT
-        lexer.h
-        lexer.c)
+        ${FLEX_Lexer_OUTPUTS})
+target_compile_options(lexer PRIVATE "-Wno-sign-compare" "-Wno-unused-function")
 
 add_library(parser
         OBJECT
-        lexer.h
-        parser.h
-        parser.c)
+        ${FLEX_Lexer_OUTPUT_HEADER}
+        ${BISON_Parser_OUTPUTS})
 
 add_library(common
         STATIC
         $<TARGET_OBJECTS:lexer>
         $<TARGET_OBJECTS:parser>)
 
-list(APPEND _targets
-        programm)
+add_executable(programm
+        programm.c
+        ${FLEX_Lexer_OUTPUT_HEADER}
+        ${BISON_Parser_OUTPUT_HEADER})
 
-foreach(_target IN LISTS _targets)
-    add_executable(${_target}
-            ${_target}.c
-            ${FLEX_Lexer_OUTPUTS})
+target_include_directories(programm
+        PRIVATE
+        ${GLIB2_INCLUDE_DIRS})
 
-    target_include_directories(${_target}
-            PRIVATE
-            ${GLIB2_INCLUDE_DIRS})
-
-    target_link_libraries(${_target}
-            common
-            ${GLIB2_LDFLAGS})
-endforeach()
+target_link_libraries(programm
+        common
+        ${GLIB2_LDFLAGS})

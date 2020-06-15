@@ -5,7 +5,7 @@
 
 int main(void)
 {
-    g_print("Parser.\n");
+    g_print("Parser is running.\n");
 
     yyin = stdin;
     yyparse();
