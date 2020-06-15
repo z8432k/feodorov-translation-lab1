@@ -1,12 +1,17 @@
 #include <glib.h>
 
-#include "lexer.h"
-#include "parser.h"
+#include "runner.h"
 
-int main(void)
+int main(int argc, char *argv[])
 {
-    g_print("Parser is running.\n");
+    g_print("Parser is running.\n\n");
 
-    yyin = stdin;
-    yyparse();
+    if (argv[1]) {
+        runner(argv[1]);
+    }
+    else {
+        g_print("Empty input.\n");
+    }
+
+    return 0;
 }

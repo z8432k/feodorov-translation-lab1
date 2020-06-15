@@ -16,21 +16,22 @@
 
 begin:          expression
                 {
-                                printf("begin detected.\n");
+                                printf("Axioma detected.\n");
+                                printf("\n\t Syntax OK.\n");
                 }
 ;
 
 expression:     expression ADD multiply
                 | multiply
                 {
-                                printf("expression detected\n");
+                                printf("expression detected.\n");
                 }
 ;
 
 multiply:       multiply MUL term
                 | term
                 {
-                                printf("multiply detecte\n");
+                                printf("multiply detected.\n");
                 }
 ;
 
@@ -38,13 +39,13 @@ term:           K_CHAR
                 | M_CHAR
                 | N_CHAR
                 {
-                                printf("term detected\n");
+                                printf("term detected.\n");
                 }
 ;
 
 %%
 
 void yyerror(const char* s) {
-                fprintf(stderr, "Parse error: %s\n", s);
+                fprintf(stderr, "\n\tParse error: %s\n", s);
                 exit(1);
 }
