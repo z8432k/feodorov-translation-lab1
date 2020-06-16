@@ -17,7 +17,6 @@
 begin:          expression
                 {
                                 printf("Axioma detected.\n");
-                                printf("\n\t Syntax OK.\n");
                 }
 ;
 
