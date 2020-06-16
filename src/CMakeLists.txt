@@ -4,7 +4,7 @@ add_library(runner
         OBJECT
                 runner.c)
 target_link_libraries(runner
-        PRIVATE
+        PUBLIC
                 common)
 target_include_directories(runner
         PUBLIC
